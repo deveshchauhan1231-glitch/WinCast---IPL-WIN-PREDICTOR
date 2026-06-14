@@ -76,6 +76,14 @@ col9, col10 = st.columns(2)
 current_score = col9.number_input("Current Score", min_value=0, max_value=300, value=80)
 current_wickets = col10.number_input("Wickets Down", min_value=0, max_value=10, value=3)
 overs_done = st.text_input("Overs Completed (e.g. 12.4)", value="12.4")
+if((overs_done==20 or current_wickets==10) ):
+    if(current_score<total_score):
+        st.subheader(f"{batting_team} won")
+        
+    else:
+        st.subheader(f"{chasing_team} won")
+    st.stop()
+
 
 is_powerplay=1
 is_middle_overs=0
@@ -192,8 +200,8 @@ if st.button("Predict", type="primary"):
     balls_remaining = 120 - balls_done
     runs_required = total_score - current_score + 1
     wickets_remaining = 10 - current_wickets
-    crr = (current_score / balls_done * 6) if balls_done > 0 else 0.0
-    rrr = (runs_required / balls_remaining * 6) if balls_remaining > 0 else 999.0
+    crr = ((current_score / balls_done) * 6) if balls_done > 0 else 0.0
+    rrr = ((runs_required / balls_remaining) * 6) if balls_remaining > 0 else 999.0
 
     input_df = pd.DataFrame([{
         "batting_team": batting_team,
