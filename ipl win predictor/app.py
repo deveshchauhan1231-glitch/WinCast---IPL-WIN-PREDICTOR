@@ -1,6 +1,8 @@
 import streamlit as st
 import pickle
 import pandas as pd
+from pathlib import Path
+
 
 st.set_page_config(
     page_title="WinCast - IPL Win Predictor",
@@ -8,12 +10,16 @@ st.set_page_config(
     layout="centered"
 )
 
+BASE_DIR = Path(__file__).parent
+
 @st.cache_resource
 def load_model():
-    with open("model.pkl", "rb") as f:
+    with open(BASE_DIR / "model.pkl", "rb") as f:
         return pickle.load(f)
 
 model = load_model()
+
+
 
 st.title("IPL Win Predictor")
 
