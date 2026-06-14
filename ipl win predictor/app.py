@@ -6,7 +6,7 @@ from pathlib import Path
 
 st.set_page_config(
     page_title="WinCast - IPL Win Predictor",
-    page_icon=str(BASE_DIR / "logo.png"),
+    page_icon=(BASE_DIR / "logo.png"),
     layout="centered"
 )
 
