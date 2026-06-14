@@ -76,13 +76,15 @@ col9, col10 = st.columns(2)
 current_score = col9.number_input("Current Score", min_value=0, max_value=300, value=80)
 current_wickets = col10.number_input("Wickets Down", min_value=0, max_value=10, value=3)
 overs_done = st.text_input("Overs Completed (e.g. 12.4)", value="12.4")
-if((overs_done==20 or current_wickets==10) ):
+if((overs_done=="20" or current_wickets==10) ):
     if(current_score<total_score):
         st.subheader(f"{batting_team} won")
         
     else:
         st.subheader(f"{chasing_team} won")
     st.stop()
+
+    
 
 
 is_powerplay=1
@@ -111,6 +113,7 @@ def parse_overs(s):
         f = float(s.strip())
         full = int(f)
         balls = min(round((f - full) * 10), 5)
+        
         return full * 6 + balls
     except:
         return None
@@ -191,6 +194,9 @@ def parse_venue(v):
 
 if st.button("Predict", type="primary"):
     balls_done = parse_overs(overs_done)
+    if balls_done > 120:
+    st.error("Overs completed cannot exceed 20 overs")
+    st.stop()
     if balls_done is None:
         st.error("Invalid overs format. Use X.Y like 12.4")
         st.stop()
