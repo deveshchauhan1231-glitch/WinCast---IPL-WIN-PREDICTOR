@@ -213,6 +213,7 @@ if st.button("Predict", type="primary"):
         st.metric(f"{batting_team} Win Probability", f"{99.9:.2f}%")
         st.metric(f"{chasing_team} Win Probability", f"{0.1:.2f}%")
         st.progress(int(0.1), text=f"{chasing_team} {0.1:.2f}% vs {batting_team} {99.9:.2f}%")
+        st.info(f"Need {runs_required} runs off {balls_remaining} balls | CRR {crr:.2f} | RRR {rrr:.2f} | {wickets_remaining} wickets left")
         st.stop()
 
     input_df = pd.DataFrame([{
