@@ -195,8 +195,8 @@ def parse_venue(v):
 if st.button("Predict", type="primary"):
     balls_done = parse_overs(overs_done)
     if balls_done > 120:
-    st.error("Overs completed cannot exceed 20 overs")
-    st.stop()
+        st.error("Overs completed cannot exceed 20 overs")
+        st.stop()
     if balls_done is None:
         st.error("Invalid overs format. Use X.Y like 12.4")
         st.stop()
