@@ -4,13 +4,15 @@ import pandas as pd
 from pathlib import Path
 
 
+
+
+BASE_DIR = Path(__file__).parent
+
 st.set_page_config(
     page_title="WinCast - IPL Win Predictor",
     page_icon=(BASE_DIR / "logo.png"),
     layout="centered"
 )
-
-BASE_DIR = Path(__file__).parent
 
 @st.cache_resource
 def load_model():
