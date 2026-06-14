@@ -112,7 +112,7 @@ def parse_overs(s):
     try:
         f = float(s.strip())
         full = int(f)
-        balls = min(round((f - full) * 10), 5)
+        balls = min(round((f - full) * 10), 5)-1
         
         return full * 6 + balls
     except:
@@ -208,6 +208,12 @@ if st.button("Predict", type="primary"):
     wickets_remaining = 10 - current_wickets
     crr = ((current_score / balls_done) * 6) if balls_done > 0 else 0.0
     rrr = ((runs_required / balls_remaining) * 6) if balls_remaining > 0 else 999.0
+    if(rrr>=36):
+        st.subheader("Result")
+        st.metric(f"{batting_team} Win Probability", f"{99.9:.2f}%")
+        st.metric(f"{chasing_team} Win Probability", f"{0.1:.2f}%")
+        st.progress(int(0.1), text=f"{chasing_team} {0.1:.2f}% vs {batting_team} {99.9:.2f}%")
+        st.stop()
 
     input_df = pd.DataFrame([{
         "batting_team": batting_team,
